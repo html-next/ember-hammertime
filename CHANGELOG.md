@@ -1,6 +1,8 @@
 Changelog
 =========
 
+## v1.0.0
+
 ## 0.0.0
 
 - Hold Your Horses,
