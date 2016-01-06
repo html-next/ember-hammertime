@@ -13,7 +13,7 @@
   },
   "repository": "https://github.com/runspired/ember-hammertime.git",
   "engines": {
-    "node": ">= 4.1.1"
+    "node": ">= 4.2.4"
   },
   "author": "",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "broccoli-asset-rev": "^2.2.0",
     "ember-cli": "1.13.13",
     "ember-cli-app-version": "^1.0.0",
-    "ember-cli-changelog": "^0.1.0",
+    "ember-cli-changelog": "^0.1.1",
     "ember-cli-content-security-policy": "^0.4.0",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-htmlbars": "^1.0.1",
