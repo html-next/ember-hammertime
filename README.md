@@ -1,5 +1,9 @@
 # Ember-hammertime
 
+[![npm version](https://badge.fury.io/js/ember-hammertime.svg)](http://badge.fury.io/js/ember-hammertime)
+[![Ember Observer Score](http://emberobserver.com/badges/ember-hammertime.svg)](http://emberobserver.com/addons/ember-hammertime)
+[![Build Status](https://travis-ci.org/runspired/ember-hammertime.svg)](https://travis-ci.org/runspired/ember-hammertime)
+
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
