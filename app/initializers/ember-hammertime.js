@@ -1,6 +1,6 @@
 // activate touch action css
-import LinkComponent from 'ember-gestures/components/link-component'; // jshint ignore:line
-import Component from 'ember-gestures/components/component'; // jshint ignore:line
+import LinkComponent from 'ember-hammertime/components/link-component'; // jshint ignore:line
+import Component from 'ember-hammertime/components/component'; // jshint ignore:line
 
 export default {
 
