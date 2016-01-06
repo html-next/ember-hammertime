@@ -13,7 +13,7 @@
   },
   "repository": "https://github.com/runspired/ember-hammertime.git",
   "engines": {
-    "node": ">= 4.2.4"
+    "node": ">= 4.0.0"
   },
   "author": "",
   "license": "MIT",
