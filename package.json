@@ -1,7 +1,7 @@
 {
   "name": "ember-hammertime",
   "version": "1.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "TouchAction Support for Ember Applications.",
   "directories": {
     "doc": "doc",
     "test": "tests"
