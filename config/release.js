@@ -1,6 +1,6 @@
 /* jshint node:true */
 // var RSVP = require('rsvp');
-var generateChangelog = require('ember-cli-changelog/lib/tasks/generate-changelog');
+var generateChangelog = require('ember-cli-changelog/lib/tasks/release-with-changelog');
 
 // For details on each option run `ember help release`
 module.exports = {
