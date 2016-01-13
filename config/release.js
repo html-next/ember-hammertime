@@ -15,4 +15,5 @@ module.exports = {
   // timezone: 'America/Los_Angeles',
 
   beforeCommit: generateChangelog
+
 };
