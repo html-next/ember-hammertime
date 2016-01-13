@@ -12,7 +12,7 @@ const {
 
 export default Mixin.create({
   attributeBindings: ['touchActionStyle:style'],
-  touchActionStyle: computed(function () {
+  touchActionStyle: computed(function() {
     // we apply if click is present
     let applyStyle = this.click;
 
