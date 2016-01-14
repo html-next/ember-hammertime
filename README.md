@@ -56,33 +56,32 @@ This is done via the touchAction Mixin available in `ember-hammertime/mixins/tou
 
 ## Contributing
 
-Contributions are very welcome.
+ - Open an Issue for discussion first if you're unsure a feature/fix is wanted.
+ - Branch off of `develop` (default branch)
+ - Use descriptive branch names (e.g. `<type>/<short-description>`)
+ - Use [Angular Style Commits](https://github.com/angular/angular.js/blob/v1.4.8/CONTRIBUTING.md#commit)
+ - PR against `develop` (default branch).
 
-When making a PR try to use the following conventions:
 
-** Commit Messages **
+### Commmits 
 
-Please use angular-style commit messages (or at least the header which consists of `type`, `scope`, and `title`).
-
-````
-<type>(<scope>): <title>
-
-<body>
-
-<footer>
-```
-
-Examples:
-
-- chore(deps): bump deps in package.json and bower.json
-- docs(component): document the `fast-action` component
-
-** Branch Naming **
-
-`type/short-description`
-
-Examples:
-
-- chore/bump-deps
-- docs/fast-action-component
-
+Angular Style commit messages have the full form:
+ 
+ ```
+ <type>(<scope>): <title>
+ 
+ <body>
+ 
+ <footer>
+ ```
+ 
+ But the abbreviated form (below) is acceptable and often preferred.
+ 
+ ```
+ <type>(<scope>): <title>
+ ```
+ 
+ Examples:
+ 
+ - chore(deps): bump deps in package.json and bower.json
+ - docs(component): document the `fast-action` component
