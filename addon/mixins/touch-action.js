@@ -32,6 +32,6 @@ export default Mixin.create({
       applyStyle = isFocusable;
     }
 
-    return new SafeString(applyStyle ? 'touch-action: manipulation; -ms-touch-action: manipulation;' : '');
+    return new SafeString(applyStyle ? 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;' : '');
   })
 });
