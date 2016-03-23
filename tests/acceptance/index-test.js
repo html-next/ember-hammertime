@@ -3,7 +3,7 @@ import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | index');
 
-const styleString = 'touch-action: manipulation; -ms-touch-action: manipulation;';
+const styleString = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
 
 test('visiting /index, ensures we hooked everything up appropriately', function(assert) {
   visit('/');
