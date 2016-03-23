@@ -39,8 +39,11 @@ being present on an element.
 For most things, you'll want the following `style` attribute to be present on the component or element.
 
 ```html
-<div style="touch-action: manipulation; -ms-touch-action: manipulation;">
+<div style="touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;">
 ```
+
+`cursor: pointer;` is required because of [bugs in Safari 9.3's](https://github.com/emberjs/ember.js/issues/13171#issuecomment-200521638) 
+partial handling of touch-action, but is also recommended CSS for all mobile browsers.
 
 The AST Walker automatically adds this style to elements when any of the following rules is matched.
 
@@ -52,6 +55,16 @@ All `link-components` (e.g. `{{link-to}}` as well as components with attributes 
 by the AST walker have a bound `style` attribute set to the above as well.
 
 This is done via the touchAction Mixin available in `ember-hammertime/mixins/touch-action`.
+
+### pointer CSS
+
+It is heavily recommended to add the following rule to your site's CSS
+
+```css
+[data-ember-action], a, button, input, .link {
+  cursor: pointer;
+}
+```
 
 
 ## Contributing
