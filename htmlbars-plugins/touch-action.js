@@ -72,7 +72,7 @@ TouchActionSupport.prototype.validate = function TouchActionSupport_validate(nod
 function elementAttribute(node, path) {
   var attributes = node.attributes;
   for (var i = 0, l = attributes.length; i < l; i++) {
-    if (attributes[i].name === 'style') {
+    if (attributes[i].name === path) {
       return attributes[i];
     }
   }

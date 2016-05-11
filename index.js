@@ -8,8 +8,13 @@ module.exports = {
     this._super.included.apply(this, arguments);
 
     // see: https://github.com/ember-cli/ember-cli/issues/3718
-    if (typeof app.import !== 'function' && app.app) {
+    while (typeof app.import !== 'function' && app.app) {
       app = app.app;
+    }
+
+    if (typeof app.import !== 'function') {
+      throw new Error('Ember-Hammertime is being used within another addon or engine ' +
+        'and is having trouble registering itself to the parent application.');
     }
 
     if (!process.env.EMBER_CLI_FASTBOOT) {
