@@ -53,7 +53,7 @@ TouchActionSupport.prototype.validate = function TouchActionSupport_validate(nod
     onValue = modifier ? hashPairForKey(modifier.hash, 'on') : false;
 
     hasAction = modifier && (!onValue || onValue === 'click');
-    isFocusable = ['select', 'button', 'input', 'a', 'textarea'].indexOf(node.tag) !== -1;
+    isFocusable = ['button', 'input', 'a', 'textarea'].indexOf(node.tag) !== -1;
 
     if (isFocusable) {
       if (node.tag === 'input') {

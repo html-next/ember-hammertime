@@ -18,7 +18,7 @@ export default Mixin.create({
       const tagName = this.get('tagName');
       const type = this.get('type');
 
-      let isFocusable = ['select', 'button', 'input', 'a', 'textarea'].indexOf(tagName) !== -1;
+      let isFocusable = ['button', 'input', 'a', 'textarea'].indexOf(tagName) !== -1;
 
       if (isFocusable) {
         if (tagName === 'input') {
