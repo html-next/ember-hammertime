@@ -7,6 +7,9 @@ const {
 } = Ember;
 
 export default Mixin.create({
+  touchActionSelectors: ['button', 'input', 'a', 'textarea'],
+  touchActionProperties: 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;',
+
   init() {
     this._super(...arguments);
     if (this.tagName) {
@@ -17,7 +20,7 @@ export default Mixin.create({
     }
   },
 
-  touchActionStyle: computed(function() {
+  touchActionStyle: computed('touchActionSelectors', 'touchActionProperties', function() {
     // we apply if click is present and tagName is present
     let applyStyle = this.applyStyle && this.click;
 
@@ -26,7 +29,7 @@ export default Mixin.create({
       const tagName = this.get('tagName');
       const type = this.get('type');
 
-      let isFocusable = ['button', 'input', 'a', 'textarea'].indexOf(tagName) !== -1;
+      let isFocusable = this.get('touchActionSelectors').indexOf(tagName) !== -1;
 
       if (isFocusable) {
         if (tagName === 'input') {
@@ -37,6 +40,6 @@ export default Mixin.create({
       applyStyle = isFocusable;
     }
 
-    return htmlSafe(applyStyle ? 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;' : '');
+    return htmlSafe(applyStyle ? this.get('touchActionProperties') : '');
   })
 });
