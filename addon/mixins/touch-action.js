@@ -3,7 +3,6 @@ import Ember from 'ember';
 const {
   computed,
   Mixin,
-  Handlebars,
   String: { htmlSafe }
 } = Ember;
 
@@ -29,6 +28,6 @@ export default Mixin.create({
       applyStyle = isFocusable;
     }
 
-    return new htmlSafe(applyStyle ? 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;' : '');
+    return htmlSafe(applyStyle ? 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;' : '');
   })
 });
