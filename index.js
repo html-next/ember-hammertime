@@ -31,7 +31,10 @@ module.exports = {
 
     registry.add('htmlbars-ast-plugin', {
       name: "touch-action",
-      plugin: TouchAction
+      plugin: TouchAction,
+      baseDir: function() {
+        return __dirname;
+      }
     });
 
   }
