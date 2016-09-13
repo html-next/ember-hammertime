@@ -3,17 +3,25 @@ import Ember from 'ember';
 const {
   computed,
   Mixin,
+  get,
+  set,
   String: { htmlSafe }
 } = Ember;
 
 export default Mixin.create({
   init() {
     this._super(...arguments);
-    if (this.tagName) {
-      this.attributeBindings = ['touchActionStyle:style'];
-      this.applyStyle = true;
-    } else {
-      this.applyStyle = false;
+    
+    if (this.tagName || this.elementId) {
+      let newAttributeBindings = [];
+      let bindings = get(this, 'attributeBindings');
+
+      if (Array.isArray(bindings)) {
+        newAttributeBindings = newAttributeBindings.concat(bindings);
+      }
+
+      newAttributeBindings.push('touchActionStyle:style');
+      set(this, 'attributeBindings', newAttributeBindings);
     }
   },
 
