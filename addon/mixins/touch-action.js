@@ -11,6 +11,7 @@ const {
 export default Mixin.create({
   init() {
     this._super(...arguments);
+    this.applyStyle = false;
     
     if (this.tagName || this.elementId) {
       let newAttributeBindings = [];
@@ -22,6 +23,7 @@ export default Mixin.create({
 
       newAttributeBindings.push('touchActionStyle:style');
       set(this, 'attributeBindings', newAttributeBindings);
+      this.applyStyle = true;
     }
   },
 
