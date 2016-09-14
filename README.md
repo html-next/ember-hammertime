@@ -47,7 +47,7 @@ partial handling of touch-action, but is also recommended CSS for all mobile bro
 
 The AST Walker automatically adds this style to elements when any of the following rules is matched.
 
-- The element's tagName is `select`, `button`, `a`, or `textarea`.
+- The element's tagName is `button`, `a`, or `textarea`.
 - The element's tagName is `input` and the element's `type` is `button`, `submit`, `text`, or `file`. 
 - The element has an action defined on it (e.g. `<div {{action "foo"}}>`)
 
@@ -65,6 +65,33 @@ It is heavily recommended to add the following rule to your site's CSS
   cursor: pointer;
 }
 ```
+
+### Configuration
+
+The AST Walker can be configured via config/environment.js:
+
+```javascript
+var ENV = {
+  // ...
+  EmberHammertime: {
+    touchActionSelectors: ['button', 'input', 'a', 'textarea'],
+    touchActionProperties: 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;'
+  }
+}
+```
+
+The same properties can be overridden on the touchAction Mixin or on your components directly.
+
+##### `touchActionSelectors`
+
+Defines which elements touch-action is applied to.
+Defaults to `['button', 'input', 'a', 'textarea']`
+
+##### `touchActionProperties`
+
+Defines the touch-action CSS style to be applied to the above selectors and `link-components`.
+Defaults to `'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;'`
+
 
 
 ## Contributing
