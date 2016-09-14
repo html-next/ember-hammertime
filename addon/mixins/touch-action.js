@@ -1,42 +1,45 @@
 import Ember from 'ember';
 
-const {
-  computed,
-  Mixin,
-  String: { htmlSafe }
-} = Ember;
+const { computed, get, set, String: { htmlSafe } } = Ember;
 
-export default Mixin.create({
+const SafeTouchAction = htmlSafe('touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;');
+const SafeEmptyString = htmlSafe('');
+
+export default Ember.Mixin.create({
   init() {
     this._super(...arguments);
-    if (this.tagName) {
-      this.attributeBindings = ['touchActionStyle:style'];
-      this.applyStyle = true;
-    } else {
-      this.applyStyle = false;
+
+    if (this.tagName || this.elementId) {
+      let newAttributeBindings = [];
+      const bindings = get(this, 'attributeBindings');
+
+      if (Array.isArray(bindings)) {
+        newAttributeBindings = newAttributeBindings.concat(bindings);
+      }
+
+      newAttributeBindings.push('touchActionStyle:style');
+      set(this, 'attributeBindings', newAttributeBindings);
     }
   },
 
   touchActionStyle: computed(function() {
+    const type = get(this, 'type');
+    const click = get(this, 'click');
+    const tagName = get(this, 'tagName');
+    
     // we apply if click is present and tagName is present
-    let applyStyle = this.applyStyle && this.click;
+    let applyStyle = tagName && click;
 
-    if (!applyStyle) {
-      // we apply if tagName
-      const tagName = this.get('tagName');
-      const type = this.get('type');
-
+    if (tagName && click) {
       let isFocusable = ['button', 'input', 'a', 'textarea'].indexOf(tagName) !== -1;
 
-      if (isFocusable) {
-        if (tagName === 'input') {
-          isFocusable = ['button', 'submit', 'text', 'file'].indexOf(type) !== -1;
-        }
+      if (isFocusable && tagName === 'input') {
+        isFocusable = ['button', 'submit', 'text', 'file'].indexOf(type) !== -1;
       }
 
       applyStyle = isFocusable;
     }
 
-    return htmlSafe(applyStyle ? 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;' : '');
+    return applyStyle ? SafeTouchAction : SafeEmptyString;
   })
 });
