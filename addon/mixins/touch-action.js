@@ -1,15 +1,31 @@
 import Ember from 'ember';
 
-const { computed, get, set, String: { htmlSafe } } = Ember;
+const {
+  computed,
+  K,
+  get,
+  Mixin,
+  set,
+  String: { htmlSafe }
+} = Ember;
 
 const SafeTouchAction = htmlSafe('touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;');
 const SafeEmptyString = htmlSafe('');
+const FocusableInputTypes = ['button', 'submit', 'text', 'file'];
+const TouchActionSelectors = ['button', 'input', 'a', 'textarea'];
 
-export default Ember.Mixin.create({
+export default Mixin.create({
+  touchActionSelectors: TouchActionSelectors,
+  touchActionProperties: SafeTouchAction,
+
   init() {
     this._super(...arguments);
 
-    if (this.tagName || this.elementId) {
+    if (this.touchActionProperties !== SafeTouchAction) {
+      this.touchActionProperties = htmlSafe(this.touchActionProperties);
+    }
+
+    if (this.tagName !== '' && this.click !== K) {
       let newAttributeBindings = [];
       const bindings = get(this, 'attributeBindings');
 
@@ -24,22 +40,21 @@ export default Ember.Mixin.create({
 
   touchActionStyle: computed(function() {
     const type = get(this, 'type');
-    const click = get(this, 'click');
     const tagName = get(this, 'tagName');
-    
-    // we apply if click is present and tagName is present
-    let applyStyle = tagName && click;
 
-    if (tagName && click) {
-      let isFocusable = ['button', 'input', 'a', 'textarea'].indexOf(tagName) !== -1;
+    // we apply if click is present and tagName is present
+    let applyStyle = tagName !== '' && this.click !== K;
+
+    if (applyStyle) {
+      let isFocusable = this.touchActionSelectors.indexOf(tagName) !== -1;
 
       if (isFocusable && tagName === 'input') {
-        isFocusable = ['button', 'submit', 'text', 'file'].indexOf(type) !== -1;
+        isFocusable = FocusableInputTypes.indexOf(type) !== -1;
       }
 
       applyStyle = isFocusable;
     }
 
-    return applyStyle ? SafeTouchAction : SafeEmptyString;
+    return applyStyle ? this.touchActionProperties : SafeEmptyString;
   })
 });

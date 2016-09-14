@@ -26,12 +26,17 @@ module.exports = {
     return false;
   },
 
+  projectConfig: function () {
+    return this.project.config(process.env.EMBER_ENV);
+  },
+
   setupPreprocessorRegistry: function(type, registry) {
     var TouchAction = require('./htmlbars-plugins/touch-action');
+    var config = this.projectConfig()['EmberHammertime'];
 
     registry.add('htmlbars-ast-plugin', {
       name: "touch-action",
-      plugin: TouchAction,
+      plugin: new TouchAction(config),
       baseDir: function() {
         return __dirname;
       }
