@@ -11,63 +11,68 @@
  <HTMLElement {{action "foo"}} style="touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;">
  ```
  */
-var TOUCH_ACTION = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
 
-function TouchActionSupport() {
-  this.syntax = null;
+function TouchAction(config) {
+  var touchActionSelectors = ['button', 'input', 'a', 'textarea'];
+  var touchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
+  config = config || {};
+
+  var TouchActionSupport = function TouchActionSupport() {
+    this.touchActionSelectors = config.touchActionSelectors || touchActionSelectors;
+    this.touchActionProperties = config.touchActionProperties || touchActionProperties;
+    this.syntax = null;
+  };
+
+  TouchActionSupport.prototype.transform = function TouchActionSupport_transform(ast) {
+    var pluginContext = this;
+    var walker = new pluginContext.syntax.Walker();
+
+    walker.visit(ast, function(node) {
+      if (pluginContext.validate(node)) {
+        var style = elementAttribute(node, 'style');
+        if (!style) {
+          style = {
+            type: 'AttrNode',
+            name: 'style',
+            value: { type: 'TextNode', chars: '' }
+          };
+          node.attributes.push(style);
+        }
+        style.value.chars += pluginContext.touchActionProperties;
+      }
+    });
+
+    return ast;
+  };
+
+  TouchActionSupport.prototype.validate = function TouchActionSupport_validate(node) {
+    var modifier;
+    var onValue;
+    var hasAction;
+    var isFocusable;
+
+    if (node.type === 'ElementNode') {
+      modifier = elementModifierForPath(node, 'action');
+      onValue = modifier ? hashPairForKey(modifier.hash, 'on') : false;
+
+      hasAction = modifier && (!onValue || onValue === 'click');
+      isFocusable = this.touchActionSelectors.indexOf(node.tag) !== -1;
+
+      if (isFocusable) {
+        if (node.tag === 'input') {
+          var type = elementAttribute(node, 'type');
+          isFocusable = ['button', 'submit', 'text', 'file'].indexOf(type) !== -1;
+        }
+      }
+
+      return hasAction || isFocusable;
+    }
+
+    return false;
+  };
+
+  return TouchActionSupport;
 }
-
-
-TouchActionSupport.prototype.transform = function TouchActionSupport_transform(ast) {
-  var pluginContext = this;
-  var walker = new pluginContext.syntax.Walker();
-
-  walker.visit(ast, function(node) {
-    if (pluginContext.validate(node)) {
-      var style = elementAttribute(node, 'style');
-      if (!style) {
-        style = {
-          type: 'AttrNode',
-          name: 'style',
-          value: { type: 'TextNode', chars: '' }
-        };
-        node.attributes.push(style);
-      }
-      style.value.chars += TOUCH_ACTION;
-    }
-  });
-
-  return ast;
-
-
-};
-
-TouchActionSupport.prototype.validate = function TouchActionSupport_validate(node) {
-  var modifier;
-  var onValue;
-  var hasAction;
-  var isFocusable;
-
-  if (node.type === 'ElementNode') {
-    modifier = elementModifierForPath(node, 'action');
-    onValue = modifier ? hashPairForKey(modifier.hash, 'on') : false;
-
-    hasAction = modifier && (!onValue || onValue === 'click');
-    isFocusable = ['select', 'button', 'input', 'a', 'textarea'].indexOf(node.tag) !== -1;
-
-    if (isFocusable) {
-      if (node.tag === 'input') {
-        var type = elementAttribute(node, 'type');
-        isFocusable = ['button', 'submit', 'text', 'file'].indexOf(type) !== -1;
-      }
-    }
-
-    return hasAction || isFocusable;
-  }
-
-  return false;
-};
-
 
 function elementAttribute(node, path) {
   var attributes = node.attributes;
@@ -114,4 +119,4 @@ function sexpr(node) {
 }
 
 
-module.exports = TouchActionSupport;
+module.exports = TouchAction;
