@@ -49,6 +49,7 @@ TouchActionSupport.prototype.validate = function TouchActionSupport_validate(nod
   var modifier;
   var onValue;
   var hasAction;
+  var hasClick;
   var isFocusable;
 
   if (node.type === 'ElementNode') {
@@ -58,6 +59,8 @@ TouchActionSupport.prototype.validate = function TouchActionSupport_validate(nod
     hasAction = modifier && (!onValue || onValue === 'click');
     isFocusable = this.touchActionSelectors.indexOf(node.tag) !== -1;
 
+    hasClick = elementAttribute(node, 'onclick');
+
     if (isFocusable) {
       if (node.tag === 'input') {
         var type = elementAttribute(node, 'type');
@@ -65,7 +68,7 @@ TouchActionSupport.prototype.validate = function TouchActionSupport_validate(nod
       }
     }
 
-    return hasAction || isFocusable;
+    return hasClick || hasAction || isFocusable;
   }
 
   return false;
