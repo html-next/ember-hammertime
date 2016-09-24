@@ -45,7 +45,8 @@ export default Mixin.create({
       click
     } = this;
 
-    let maybeApplyStyle = ignoreTouchAction === false && tagName !== '' && click !== K;
+    let maybeApplyStyle = ignoreTouchAction === false && tagName !== '';
+    let hasClickHandler = ignoreTouchAction === false && click !== K;
     let shouldApplyStyle = false;
 
     if (maybeApplyStyle) {
@@ -58,7 +59,7 @@ export default Mixin.create({
       shouldApplyStyle = isFocusable;
     }
 
-    if (shouldApplyStyle) {
+    if (hasClickHandler || shouldApplyStyle) {
       let newAttributeBindings = [];
       const bindings = get(this, 'attributeBindings');
 

@@ -10,6 +10,7 @@ test('visiting /index, ensures we hooked everything up appropriately', function(
 
   andThen(function() {
     assert.equal(currentURL(), '/');
+
     const linkComponent = find('#indexLink').get(0).getAttribute('style');
     const clickComponent = find('#clickComponent').get(0).getAttribute('style');
     const nativeLink = find('#nativeLink').get(0).getAttribute('style');
