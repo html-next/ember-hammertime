@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.1.1
+
+#### Commits
+
+- [99fa34c1](https://github.com/runspired/ember-hammertime/commit/99fa34c14a92931dba7f925a40ebbe0e5fa3eb41) **feat(onclick)**: auto-adds touch-action for elements with on-click handlers *by [Chris Thoburn](https://github.com/runspired)*
+
 ## v1.1.0
 
 ### Pull Requests
