@@ -1,6 +1,18 @@
 Changelog
 =========
 
+## v1.1.0
+
+### Pull Requests
+
+- [#9](https://github.com/runspired/ember-hammertime/pull/9)  Release Changes  *by [Chris Thoburn](https://github.com/runspired)*
+- [#12](https://github.com/runspired/ember-hammertime/pull/12)  remove select from touch-action isFocusable list  *by [wongpeiyi/fix](https://github.com/wongpeiyi/fix)*
+- [#16](https://github.com/runspired/ember-hammertime/pull/16)  Provide baseDir to allow for proper caching  *by [wongpeiyi/chore](https://github.com/wongpeiyi/chore)*
+- [#18](https://github.com/runspired/ember-hammertime/pull/18) **fix error**: `cannot use `attributeBindings` on a tag-less component`  *by [eriktrom/bugfix](https://github.com/eriktrom/bugfix)*
+- [#20](https://github.com/runspired/ember-hammertime/pull/20)  Do not blow away existing attributeBindings  *by [Travis Hoover](https://github.com/thoov)*
+- [#23](https://github.com/runspired/ember-hammertime/pull/23)  Update release branch  *by [Chris Thoburn](https://github.com/runspired)*
+- [#24](https://github.com/runspired/ember-hammertime/pull/24)  If a component binds its style attribute, then merge this with the st…  *by [pieter-v](https://github.com/pieter-v)*
+
 ## v1.0.2
 
 ### Pull Requests
