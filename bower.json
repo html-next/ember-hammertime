@@ -7,6 +7,6 @@
     "ember-qunit-notifications": "~0.1.0"
   },
   "devDependencies": {
-    "hammer-time": "~1.0.0"
+    "hammer-time": "^1.1.0"
   }
 }

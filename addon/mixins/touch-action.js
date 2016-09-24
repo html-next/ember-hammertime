@@ -6,7 +6,6 @@ const {
   K,
   get,
   Mixin,
-  set,
   String: {htmlSafe, isHTMLSafe}
 } = Ember;
 
@@ -17,8 +16,10 @@ const TouchActionProperties = 'touch-action: manipulation; -ms-touch-action: man
 function touchActionStyle() {
   let style = get(this, 'touchActionProperties');
   let otherStyleKey = get(this, 'otherStyleKey');
+
   if (otherStyleKey) {
     let otherStyle = get(this, otherStyleKey);
+
     if (otherStyle) {
       if (isHTMLSafe(otherStyle)) {
         otherStyle = otherStyle.string;
@@ -26,38 +27,49 @@ function touchActionStyle() {
       style += otherStyle;
     }
   }
+
   return htmlSafe(style);
 }
 
 export default Mixin.create({
   touchActionSelectors: TouchActionSelectors,
   touchActionProperties: TouchActionProperties,
+  ignoreTouchAction: false,
 
   init() {
-    this._super(...arguments);
+    this._super();
 
-    const tagName = get(this, 'tagName');
+    const {
+      tagName,
+      ignoreTouchAction,
+      click
+    } = this;
 
-    let applyStyle = tagName !== '' && this.click !== K;
-    if (applyStyle) {
+    let maybeApplyStyle = ignoreTouchAction === false && tagName !== '' && click !== K;
+    let shouldApplyStyle = false;
+
+    if (maybeApplyStyle) {
       let isFocusable = this.touchActionSelectors.indexOf(tagName) !== -1;
+
       if (isFocusable && tagName === 'input') {
-        const type = get(this, 'type');
-        isFocusable = FocusableInputTypes.indexOf(type) !== -1;
+        isFocusable = FocusableInputTypes.indexOf(this.type) !== -1;
       }
-      applyStyle = isFocusable;
+
+      shouldApplyStyle = isFocusable;
     }
 
-    if (applyStyle) {
+    if (shouldApplyStyle) {
       let newAttributeBindings = [];
       const bindings = get(this, 'attributeBindings');
+
+      // don't override other style bindings if present
       if (Array.isArray(bindings)) {
         bindings.forEach((binding) => {
           if (binding === 'style') {
             this.otherStyleKey = binding;
           } else {
-            // endsWith is es6
             let end = binding.length - 6;
+
             if (end > 0 && ':style' === binding.substring(end)) {
               this.otherStyleKey = binding.substring(0, end);
             }
@@ -65,8 +77,9 @@ export default Mixin.create({
         });
         newAttributeBindings = newAttributeBindings.concat(bindings);
       }
+
       newAttributeBindings.push('touchActionStyle:style');
-      set(this, 'attributeBindings', newAttributeBindings);
+      this.set('attributeBindings', newAttributeBindings);
 
       let desc = this.otherStyleKey ? computed(this.otherStyleKey, touchActionStyle) : computed(touchActionStyle);
       defineProperty(this, 'touchActionStyle', desc);
