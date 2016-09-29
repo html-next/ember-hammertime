@@ -49,7 +49,7 @@ export default Mixin.create({
     const hasTag = (typeof tagName === 'string' && tagName.length > 0) || (tagName === null && hasClick);
     if (!hasTag) { return; }
 
-    let maybeApplyStyle = ignoreTouchAction === false && hasTag;
+    let maybeApplyStyle = ignoreTouchAction === false;
     let hasClickHandler = ignoreTouchAction === false && hasClick;
     let shouldApplyStyle = false;
 
