@@ -45,8 +45,12 @@ export default Mixin.create({
       click
     } = this;
 
-    let maybeApplyStyle = ignoreTouchAction === false && tagName !== '';
-    let hasClickHandler = ignoreTouchAction === false && click !== K;
+    const hasClick = click !== K;
+    const hasTag = (typeof tagName === 'string' && tagName.length > 0) || (tagName === null && hasClick);
+    if (!hasTag) { return; }
+
+    let maybeApplyStyle = ignoreTouchAction === false;
+    let hasClickHandler = ignoreTouchAction === false && hasClick;
     let shouldApplyStyle = false;
 
     if (maybeApplyStyle) {
