@@ -3,7 +3,6 @@ import Ember from "ember";
 const {
   computed,
   defineProperty,
-  K,
   get,
   Mixin,
   String: {htmlSafe, isHTMLSafe}
@@ -45,8 +44,8 @@ export default Mixin.create({
       click
     } = this;
 
-    const hasClick = click !== K;
-    const hasTag = (typeof tagName === 'string' && tagName.length > 0) || (tagName === null && hasClick);
+    const hasClick = click && click.apply;
+    const hasTag = tagName !== '' || (tagName === null && hasClick);
     if (!hasTag) { return; }
 
     let maybeApplyStyle = ignoreTouchAction === false;
