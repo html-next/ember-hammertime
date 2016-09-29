@@ -37,6 +37,14 @@ before_install:
   - "npm config set spin false"
   - "npm config set progress false"
   - "npm install phantomjs-prebuilt"
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - sudo apt-get update
+  - sudo apt-get install -y libappindicator1 fonts-liberation
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome*.deb
+  - npm install -g bower
+  - bower --version
+  - node_modules/phantomjs-prebuilt/bin/phantomjs --version
 
 install:
   - npm install -g bower
@@ -51,3 +59,4 @@ script:
 branches:
   only:
     - master
+    - develop
