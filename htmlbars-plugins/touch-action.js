@@ -1,3 +1,4 @@
+/* global module */
 /**
  An HTMLBars AST transformation that makes all instances of
 
@@ -12,67 +13,66 @@
  ```
  */
 
-function TouchAction(config) {
+function TouchActionSupport(config) {
   var touchActionSelectors = ['button', 'input', 'a', 'textarea'];
   var touchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
   config = config || {};
 
-  var TouchActionSupport = function TouchActionSupport() {
-    this.touchActionSelectors = config.touchActionSelectors || touchActionSelectors;
-    this.touchActionProperties = config.touchActionProperties || touchActionProperties;
-    this.syntax = null;
-  };
+  this.touchActionSelectors = config.touchActionSelectors || touchActionSelectors;
+  this.touchActionProperties = config.touchActionProperties || touchActionProperties;
+  this.syntax = null;
+}
 
-  TouchActionSupport.prototype.transform = function TouchActionSupport_transform(ast) {
-    var pluginContext = this;
-    var walker = new pluginContext.syntax.Walker();
+TouchActionSupport.prototype.transform = function TouchActionSupport_transform(ast) {
+  var pluginContext = this;
+  var walker = new pluginContext.syntax.Walker();
 
-    walker.visit(ast, function(node) {
-      if (pluginContext.validate(node)) {
-        var style = elementAttribute(node, 'style');
-        if (!style) {
-          style = {
-            type: 'AttrNode',
-            name: 'style',
-            value: { type: 'TextNode', chars: '' }
-          };
-          node.attributes.push(style);
-        }
-        style.value.chars += pluginContext.touchActionProperties;
+  walker.visit(ast, function(node) {
+    if (pluginContext.validate(node)) {
+      var style = elementAttribute(node, 'style');
+      if (!style) {
+        style = {
+          type: 'AttrNode',
+          name: 'style',
+          value: { type: 'TextNode', chars: '' }
+        };
+        node.attributes.push(style);
       }
-    });
+      style.value.chars += pluginContext.touchActionProperties;
+    }
+  });
 
-    return ast;
-  };
+  return ast;
+};
 
-  TouchActionSupport.prototype.validate = function TouchActionSupport_validate(node) {
-    var modifier;
-    var onValue;
-    var hasAction;
-    var isFocusable;
+TouchActionSupport.prototype.validate = function TouchActionSupport_validate(node) {
+  var modifier;
+  var onValue;
+  var hasAction;
+  var hasClick;
+  var isFocusable;
 
-    if (node.type === 'ElementNode') {
-      modifier = elementModifierForPath(node, 'action');
-      onValue = modifier ? hashPairForKey(modifier.hash, 'on') : false;
+  if (node.type === 'ElementNode') {
+    modifier = elementModifierForPath(node, 'action');
+    onValue = modifier ? hashPairForKey(modifier.hash, 'on') : false;
 
-      hasAction = modifier && (!onValue || onValue === 'click');
-      isFocusable = this.touchActionSelectors.indexOf(node.tag) !== -1;
+    hasAction = modifier && (!onValue || onValue === 'click');
+    isFocusable = this.touchActionSelectors.indexOf(node.tag) !== -1;
 
-      if (isFocusable) {
-        if (node.tag === 'input') {
-          var type = elementAttribute(node, 'type');
-          isFocusable = ['button', 'submit', 'text', 'file'].indexOf(type) !== -1;
-        }
+    hasClick = elementAttribute(node, 'onclick');
+
+    if (isFocusable) {
+      if (node.tag === 'input') {
+        var type = elementAttribute(node, 'type');
+        isFocusable = ['button', 'submit', 'text', 'file'].indexOf(type) !== -1;
       }
-
-      return hasAction || isFocusable;
     }
 
-    return false;
-  };
+    return hasClick || hasAction || isFocusable;
+  }
 
-  return TouchActionSupport;
-}
+  return false;
+};
 
 function elementAttribute(node, path) {
   var attributes = node.attributes;
@@ -118,5 +118,9 @@ function sexpr(node) {
   }
 }
 
-
-module.exports = TouchAction;
+module.exports = {
+  TouchActionSupport,
+  getBoundPlugin: function(config) {
+    return TouchActionSupport.bind(TouchActionSupport, config);
+  }
+};

@@ -1,60 +1,93 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 const {
   computed,
+  defineProperty,
   K,
   get,
   Mixin,
-  set,
-  String: { htmlSafe }
+  String: {htmlSafe, isHTMLSafe}
 } = Ember;
 
-const SafeTouchAction = htmlSafe('touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;');
-const SafeEmptyString = htmlSafe('');
 const FocusableInputTypes = ['button', 'submit', 'text', 'file'];
 const TouchActionSelectors = ['button', 'input', 'a', 'textarea'];
+const TouchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
+
+function touchActionStyle() {
+  let style = get(this, 'touchActionProperties');
+  let otherStyleKey = get(this, 'otherStyleKey');
+
+  if (otherStyleKey) {
+    let otherStyle = get(this, otherStyleKey);
+
+    if (otherStyle) {
+      if (isHTMLSafe(otherStyle)) {
+        otherStyle = otherStyle.string;
+      }
+      style += otherStyle;
+    }
+  }
+
+  return htmlSafe(style);
+}
 
 export default Mixin.create({
   touchActionSelectors: TouchActionSelectors,
-  touchActionProperties: SafeTouchAction,
+  touchActionProperties: TouchActionProperties,
+  ignoreTouchAction: false,
 
   init() {
-    this._super(...arguments);
+    this._super();
 
-    if (this.touchActionProperties !== SafeTouchAction) {
-      this.touchActionProperties = htmlSafe(this.touchActionProperties);
+    const {
+      tagName,
+      ignoreTouchAction,
+      click
+    } = this;
+
+    const hasClick = click !== K;
+    const hasTag = (typeof tagName === 'string' && tagName.length > 0) || (tagName === null && hasClick);
+    if (!hasTag) { return; }
+
+    let maybeApplyStyle = ignoreTouchAction === false;
+    let hasClickHandler = ignoreTouchAction === false && hasClick;
+    let shouldApplyStyle = false;
+
+    if (maybeApplyStyle) {
+      let isFocusable = this.touchActionSelectors.indexOf(tagName) !== -1;
+
+      if (isFocusable && tagName === 'input') {
+        isFocusable = FocusableInputTypes.indexOf(this.type) !== -1;
+      }
+
+      shouldApplyStyle = isFocusable;
     }
 
-    if (this.tagName !== '' && this.click !== K) {
+    if (hasClickHandler || shouldApplyStyle) {
       let newAttributeBindings = [];
       const bindings = get(this, 'attributeBindings');
 
+      // don't override other style bindings if present
       if (Array.isArray(bindings)) {
+        bindings.forEach((binding) => {
+          if (binding === 'style') {
+            this.otherStyleKey = binding;
+          } else {
+            let end = binding.length - 6;
+
+            if (end > 0 && ':style' === binding.substring(end)) {
+              this.otherStyleKey = binding.substring(0, end);
+            }
+          }
+        });
         newAttributeBindings = newAttributeBindings.concat(bindings);
       }
 
       newAttributeBindings.push('touchActionStyle:style');
-      set(this, 'attributeBindings', newAttributeBindings);
+      this.set('attributeBindings', newAttributeBindings);
+
+      let desc = this.otherStyleKey ? computed(this.otherStyleKey, touchActionStyle) : computed(touchActionStyle);
+      defineProperty(this, 'touchActionStyle', desc);
     }
   },
-
-  touchActionStyle: computed(function() {
-    const type = get(this, 'type');
-    const tagName = get(this, 'tagName');
-
-    // we apply if click is present and tagName is present
-    let applyStyle = tagName !== '' && this.click !== K;
-
-    if (applyStyle) {
-      let isFocusable = this.touchActionSelectors.indexOf(tagName) !== -1;
-
-      if (isFocusable && tagName === 'input') {
-        isFocusable = FocusableInputTypes.indexOf(type) !== -1;
-      }
-
-      applyStyle = isFocusable;
-    }
-
-    return applyStyle ? this.touchActionProperties : SafeEmptyString;
-  })
 });

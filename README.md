@@ -4,6 +4,18 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-hammertime.svg)](http://emberobserver.com/addons/ember-hammertime)
 [![Build Status](https://travis-ci.org/runspired/ember-hammertime.svg)](https://travis-ci.org/runspired/ember-hammertime)
 
+Single install instant support for removing the click delay across all platforms.
+
+## Usage
+
+`ember install ember-hammertime`
+
+This will run the default blueprint which additionally installs `hammer-time`.
+
+Once this is complete, you're done! If you really want to know what this does and how, read on below.
+
+## About
+
 Ember-hammertime uses an AST Walker to add [touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action)
  styles to DOM Elements that need them to work with the [hammer-time](https://github.com/hammerjs/hammer-time)
  touch-action polyfill.  Hammer-time is a *better* fastclick through polyfill.
@@ -11,7 +23,7 @@ Ember-hammertime uses an AST Walker to add [touch-action](https://developer.mozi
 ## Support, Questions, Collaboration
 
 `ember-hammertime` is the little brother of [ember-gestures](https://github.com/runspired/ember-gestures).  For support, questions,
-collaboration or discussion you should join the [addon-ember-gestures](https://embercommunity.slack.com/messages/addon-ember-gestures/) channel on Slack.
+collaboration or discussion you should join the [e-gestures](https://embercommunity.slack.com/messages/e-gestures/) channel on Slack.
 
 [![Slack Status](https://ember-community-slackin.herokuapp.com/badge.svg)](https://ember-community-slackin.herokuapp.com/)
 
@@ -23,12 +35,6 @@ collaboration or discussion you should join the [addon-ember-gestures](https://e
 [![dependencies](https://david-dm.org/runspired/ember-hammertime.svg)](https://david-dm.org/runspired/ember-hammertime)
 [![devDependency Status](https://david-dm.org/runspired/ember-hammertime/dev-status.svg)](https://david-dm.org/runspired/ember-hammertime#info=devDependencies)
 
-
-## Usage
-
-`ember install ember-hammertime`
-
-This will run the default blueprint which additionally installs `hammer-time`.
 
 #### Using Touch-action as a fastclick
 
