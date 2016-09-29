@@ -8,7 +8,7 @@ dist: trusty
 
 addons:
   code_climate:
-    repo_token: 74740f388595590cab11e48b87581938d3596bf7718cd5df14ab90a8ab39e165
+    repo_token: dcdb6b3f5f69038c1e8ead30dd76ceb52fa93e000af9f07322132d03f5dc0530
   apt:
     sources:
     - google-chrome
