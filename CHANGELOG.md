@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## v1.1.2
+
+### Pull Requests
+
+- [#17](https://github.com/runspired/ember-hammertime/pull/17)  Remove link view deprecation  *by [Heather Brysiewicz](https://github.com/hbrysiewicz)*
+- [#26](https://github.com/runspired/ember-hammertime/pull/26)  fix error thrown when tagName has not yet been defined on a component  *by [eriktrom/bugfix](https://github.com/eriktrom/bugfix)*
+- [#28](https://github.com/runspired/ember-hammertime/pull/28)  Work towards chrome install on travis  *by [eriktrom/feature](https://github.com/eriktrom/feature)*
+
 ## v1.1.1
 
 #### Commits
