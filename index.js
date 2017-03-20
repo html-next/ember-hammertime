@@ -1,6 +1,10 @@
 /* jshint node: true */
 'use strict';
 
+var path = require('path');
+var Funnel = require('broccoli-funnel');
+var MergeTrees = require('broccoli-merge-trees');
+
 module.exports = {
   name: 'ember-hammertime',
 
@@ -18,8 +22,16 @@ module.exports = {
     }
 
     if (!process.env.EMBER_CLI_FASTBOOT) {
-      app.import(app.bowerDirectory + '/hammer-time/hammer-time.js');
+      app.import('vendor/hammer-time.js');
     }
+  },
+
+  treeForVendor(vendorTree) {
+    var hammertimeTree = new Funnel(path.dirname(require.resolve('hammer-timejs/hammer-time.js')), {
+      files: ['hammer-time.js'],
+    });
+
+    return new MergeTrees([vendorTree, hammertimeTree]);
   },
 
   isDevelopingAddon: function() {
