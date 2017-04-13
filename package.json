@@ -13,7 +13,7 @@
   },
   "repository": "https://github.com/runspired/ember-hammertime.git",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4.0.0"
   },
   "author": "",
   "license": "MIT",
@@ -49,6 +49,7 @@
   "dependencies": {
     "broccoli-funnel": "^1.1.0",
     "broccoli-merge-trees": "^2.0.0",
+    "broccoli-stew": "^1.4.0",
     "ember-cli-babel": "^5.1.6",
     "hammer-timejs": "^1.1.0"
   },

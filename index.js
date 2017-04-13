@@ -1,14 +1,15 @@
 /* jshint node: true */
 'use strict';
 
-var path = require('path');
-var Funnel = require('broccoli-funnel');
-var MergeTrees = require('broccoli-merge-trees');
+const path = require('path');
+const Funnel = require('broccoli-funnel');
+const MergeTrees = require('broccoli-merge-trees');
+const map = require('broccoli-stew').map;
 
 module.exports = {
   name: 'ember-hammertime',
 
-  included: function (app) {
+  included(app) {
     this._super.included.apply(this, arguments);
 
     // see: https://github.com/ember-cli/ember-cli/issues/3718
@@ -21,35 +22,34 @@ module.exports = {
         'and is having trouble registering itself to the parent application.');
     }
 
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      app.import('vendor/hammer-time.js');
-    }
+    app.import('vendor/hammer-time.js');
   },
 
   treeForVendor(vendorTree) {
-    var hammertimeTree = new Funnel(path.dirname(require.resolve('hammer-timejs/hammer-time.js')), {
+    let hammertimeTree = new Funnel(path.dirname(require.resolve('hammer-timejs/hammer-time.js')), {
       files: ['hammer-time.js'],
     });
+    hammertimeTree = map(hammertimeTree, (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
 
     return new MergeTrees([vendorTree, hammertimeTree]);
   },
 
-  isDevelopingAddon: function() {
+  isDevelopingAddon() {
     return false;
   },
 
-  projectConfig: function () {
+  projectConfig() {
     return this.project.config(process.env.EMBER_ENV);
   },
 
-  setupPreprocessorRegistry: function(type, registry) {
-    var TouchAction = require('./htmlbars-plugins/touch-action');
-    var config = this.projectConfig()['EmberHammertime'];
+  setupPreprocessorRegistry(type, registry) {
+    let TouchAction = require('./htmlbars-plugins/touch-action');
+    let config = this.projectConfig()['EmberHammertime'];
 
     registry.add('htmlbars-ast-plugin', {
       name: "touch-action",
       plugin: TouchAction.getBoundPlugin(config),
-      baseDir: function() {
+      baseDir() {
         return __dirname;
       }
     });
