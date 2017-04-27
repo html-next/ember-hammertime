@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/ember-hammertime.svg)](http://badge.fury.io/js/ember-hammertime)
 [![Ember Observer Score](http://emberobserver.com/badges/ember-hammertime.svg)](http://emberobserver.com/addons/ember-hammertime)
-[![Build Status](https://travis-ci.org/runspired/ember-hammertime.svg)](https://travis-ci.org/runspired/ember-hammertime)
+[![Build Status](https://travis-ci.org/html-next/ember-hammertime.svg)](https://travis-ci.org/html-next/ember-hammertime)
 
 Single install instant support for removing the click delay across all platforms.
 
@@ -22,7 +22,7 @@ Ember-hammertime uses an AST Walker to add [touch-action](https://developer.mozi
 
 ## Support, Questions, Collaboration
 
-`ember-hammertime` is the little brother of [ember-gestures](https://github.com/runspired/ember-gestures).  For support, questions,
+`ember-hammertime` is the little brother of [ember-gestures](https://github.com/html-next/ember-gestures).  For support, questions,
 collaboration or discussion you should join the [e-gestures](https://embercommunity.slack.com/messages/e-gestures/) channel on Slack.
 
 [![Slack Status](https://ember-community-slackin.herokuapp.com/badge.svg)](https://ember-community-slackin.herokuapp.com/)
@@ -32,8 +32,8 @@ collaboration or discussion you should join the [e-gestures](https://embercommun
 
 [Changelog](./CHANGELOG.md)
 
-[![dependencies](https://david-dm.org/runspired/ember-hammertime.svg)](https://david-dm.org/runspired/ember-hammertime)
-[![devDependency Status](https://david-dm.org/runspired/ember-hammertime/dev-status.svg)](https://david-dm.org/runspired/ember-hammertime#info=devDependencies)
+[![dependencies](https://david-dm.org/html-next/ember-hammertime.svg)](https://david-dm.org/html-next/ember-hammertime)
+[![devDependency Status](https://david-dm.org/html-next/ember-hammertime/dev-status.svg)](https://david-dm.org/html-next/ember-hammertime#info=devDependencies)
 
 
 #### Using Touch-action as a fastclick
