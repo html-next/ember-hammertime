@@ -27,11 +27,18 @@ module.exports = {
   },
 
   treeForVendor(vendorTree) {
+    var trees = [];
     var hammertimeTree = new Funnel(path.dirname(require.resolve('hammer-timejs/hammer-time.js')), {
       files: ['hammer-time.js'],
     });
 
-    return new MergeTrees([vendorTree, hammertimeTree]);
+    if (vendorTree !== undefined) {
+      trees.push(vendorTree);
+    }
+    
+    trees.push(hammertimeTree);
+    
+    return new MergeTrees(trees);
   },
 
   isDevelopingAddon: function() {
