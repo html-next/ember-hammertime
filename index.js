@@ -1,4 +1,4 @@
-/* jshint node: true */
+/* eslint-env node */
 'use strict';
 
 const path = require('path');
@@ -31,7 +31,13 @@ module.exports = {
     });
     hammertimeTree = map(hammertimeTree, (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
 
-    return new MergeTrees([vendorTree, hammertimeTree]);
+    if (vendorTree !== undefined) {
+      trees.push(vendorTree);
+    }
+    
+    trees.push(hammertimeTree);
+    
+    return new MergeTrees(trees);
   },
 
   isDevelopingAddon() {

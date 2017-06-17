@@ -11,10 +11,10 @@ test('visiting /index, ensures we hooked everything up appropriately', function(
   andThen(function() {
     assert.equal(currentURL(), '/');
 
-    const linkComponent = find('#indexLink').get(0).getAttribute('style');
-    const clickComponent = find('#clickComponent').get(0).getAttribute('style');
-    const nativeLink = find('#nativeLink').get(0).getAttribute('style');
-    const onClickElement = find('#actionOnClick').get(0).getAttribute('style');
+    let linkComponent = find('#indexLink').get(0).getAttribute('style');
+    let clickComponent = find('#clickComponent').get(0).getAttribute('style');
+    let nativeLink = find('#nativeLink').get(0).getAttribute('style');
+    let onClickElement = find('#actionOnClick').get(0).getAttribute('style');
 
     assert.equal(linkComponent, styleString, `Actual Link Style: ${linkComponent}`);
     assert.equal(clickComponent, styleString, `Actual Click Component Style: ${clickComponent}`);
