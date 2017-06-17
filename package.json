@@ -26,7 +26,7 @@
   "dependencies": {
     "broccoli-funnel": "^1.1.0",
     "broccoli-merge-trees": "^2.0.0",
-    "broccoli-stew": "^1.4.0",
+    "broccoli-stew": "^1.5.0",
     "ember-cli-babel": "^6.0.0",
     "hammer-timejs": "^1.1.0"
   },
@@ -48,7 +48,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-resolver": "^4.0.0",
-    "ember-source": "~2.14.0-beta.1",
+    "ember-source": "~2.14.0-beta.3",
     "eslint-plugin-ember-suave": "^1.0.0",
     "loader.js": "^4.2.3"
   },
