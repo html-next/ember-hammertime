@@ -27,17 +27,11 @@ module.exports = {
 
   treeForVendor(vendorTree) {
     let hammertimeTree = new Funnel(path.dirname(require.resolve('hammer-timejs/hammer-time.js')), {
-      files: ['hammer-time.js'],
+      files: ['hammer-time.js']
     });
     hammertimeTree = map(hammertimeTree, (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
 
-    if (vendorTree !== undefined) {
-      trees.push(vendorTree);
-    }
-    
-    trees.push(hammertimeTree);
-    
-    return new MergeTrees(trees);
+    return new MergeTrees([vendorTree, hammertimeTree]);
   },
 
   isDevelopingAddon() {
@@ -53,7 +47,7 @@ module.exports = {
     let config = this.projectConfig()['EmberHammertime'];
 
     registry.add('htmlbars-ast-plugin', {
-      name: "touch-action",
+      name: 'touch-action',
       plugin: TouchAction.getBoundPlugin(config),
       baseDir() {
         return __dirname;
