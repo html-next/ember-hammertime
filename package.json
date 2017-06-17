@@ -26,6 +26,7 @@
   "dependencies": {
     "broccoli-funnel": "^1.1.0",
     "broccoli-merge-trees": "^2.0.0",
+    "broccoli-stew": "^1.4.0",
     "ember-cli-babel": "^6.0.0",
     "hammer-timejs": "^1.1.0"
   },
