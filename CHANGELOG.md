@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.2.2
+
+### Pull Requests
+
+- [#34](https://github.com/html-next/ember-hammertime/pull/34)  Fix for upcoming FastBoot 1.0 breaking changes  *by [simon](https://github.com/simonihmig)*
+
 ## v1.1.2
 
 ### Pull Requests
