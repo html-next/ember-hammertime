@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.2.3
+
+### Pull Requests
+
+- [#37](https://github.com/html-next/ember-hammertime/pull/37)  Fix undefined tree  *by [html-next](https://github.com/html-next)*
+
 ## v1.2.2
 
 ### Pull Requests
