@@ -13,13 +13,10 @@
  ```
  */
 
-function TouchActionSupport(config) {
-  var touchActionSelectors = ['button', 'input', 'a', 'textarea'];
-  var touchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
-  config = config || {};
+let touchActionSelectors = ['button', 'input', 'a', 'textarea'];
+let touchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
 
-  this.touchActionSelectors = config.touchActionSelectors || touchActionSelectors;
-  this.touchActionProperties = config.touchActionProperties || touchActionProperties;
+function TouchActionSupport() {
   this.syntax = null;
 }
 
@@ -38,7 +35,7 @@ TouchActionSupport.prototype.transform = function TouchActionSupport_transform(a
         };
         node.attributes.push(style);
       }
-      style.value.chars += pluginContext.touchActionProperties;
+      style.value.chars += touchActionProperties;
     }
   });
 
@@ -57,7 +54,7 @@ TouchActionSupport.prototype.validate = function TouchActionSupport_validate(nod
     onValue = modifier ? hashPairForKey(modifier.hash, 'on') : false;
 
     hasAction = modifier && (!onValue || onValue === 'click');
-    isFocusable = this.touchActionSelectors.indexOf(node.tag) !== -1;
+    isFocusable = touchActionSelectors.indexOf(node.tag) !== -1;
 
     hasClick = elementAttribute(node, 'onclick');
 
@@ -118,9 +115,11 @@ function sexpr(node) {
   }
 }
 
-module.exports = {
-  TouchActionSupport,
-  getBoundPlugin: function(config) {
-    return TouchActionSupport.bind(TouchActionSupport, config);
-  }
-};
+function setConfigValues(config) {
+  config = config || {};
+
+  touchActionSelectors = config.touchActionSelectors || touchActionSelectors;
+  touchActionProperties = config.touchActionProperties || touchActionProperties;
+}
+
+module.exports = { TouchActionSupport, setConfigValues };
