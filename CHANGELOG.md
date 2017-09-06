@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## v1.2.4
+
+### Pull Requests
+
+- [#37](https://github.com/html-next/ember-hammertime/pull/37)  Fix undefined tree  *by [html-next](https://github.com/html-next)*
+- [#39](https://github.com/html-next/ember-hammertime/pull/39)  Released v1.2.3  *by [html-next](https://github.com/html-next)*
+- [#40](https://github.com/html-next/ember-hammertime/pull/40)  Update Ember and fix AST issues  *by [html-next](https://github.com/html-next)*
+
 ## v1.2.3
 
 ### Pull Requests
