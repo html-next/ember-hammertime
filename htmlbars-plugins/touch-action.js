@@ -13,8 +13,8 @@
  ```
  */
 
-let touchActionSelectors = ['button', 'input', 'a', 'textarea'];
-let touchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
+var touchActionSelectors = ['button', 'input', 'a', 'textarea'];
+var touchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
 
 function TouchActionSupport() {
   this.syntax = null;
