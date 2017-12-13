@@ -35,8 +35,9 @@ collaboration or discussion you should join the [e-gestures](https://embercommun
 [![dependencies](https://david-dm.org/html-next/ember-hammertime.svg)](https://david-dm.org/html-next/ember-hammertime)
 [![devDependency Status](https://david-dm.org/html-next/ember-hammertime/dev-status.svg)](https://david-dm.org/html-next/ember-hammertime#info=devDependencies)
 
+## Usage
 
-#### Using Touch-action as a fastclick
+### Using Touch-action as a fastclick
 
 `ember-hammertime` uses [hammer-time](https://github.com/hammerjs/hammer-time) as a polyfill for `touch-action` CSS
 to enable cross-platform `fastclick`.  This polyfill works based on the presence of `style="touch-action: <foo>;"`
@@ -98,7 +99,9 @@ Defaults to `['button', 'input', 'a', 'textarea']`
 Defines the touch-action CSS style to be applied to the above selectors and `link-components`.
 Defaults to `'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;'`
 
+### Disabling hammertime for specific components
 
+To disable the adding of `touchActionProperties` on a specific component, set `ignoreTouchAction=true` by passing it in or setting it on the component's root.
 
 ## Contributing
 
