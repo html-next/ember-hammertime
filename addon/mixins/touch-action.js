@@ -9,7 +9,13 @@ const {
 } = Ember;
 
 const FocusableInputTypes = ['button', 'submit', 'text', 'file'];
+// Set this to `false` to not apply the styles automatically to elements with an `action`
+const TouchActionOnAction = true;
+// Remove 'onclick' if you do not want the styles automatically applied to elements with an `onclick`
+const TouchActionAttributes = ['onclick'];
+// Remove whichever element types you do not want automatically getting styles applied to them
 const TouchActionSelectors = ['button', 'input', 'a', 'textarea'];
+// The actual style string that is applied to the elements. You can tweak this if you want something different.
 const TouchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
 
 function touchActionStyle() {
@@ -31,6 +37,8 @@ function touchActionStyle() {
 }
 
 export default Mixin.create({
+  touchActionOnAction: TouchActionOnAction,
+  touchActionAttributes: TouchActionAttributes,
   touchActionSelectors: TouchActionSelectors,
   touchActionProperties: TouchActionProperties,
   ignoreTouchAction: false,

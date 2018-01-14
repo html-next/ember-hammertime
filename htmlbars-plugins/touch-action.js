@@ -13,7 +13,13 @@
  ```
  */
 
+// Set this to `false` to not apply the styles automatically to elements with an `action`
+var touchActionOnAction = true;
+// Remove 'onclick' if you do not want the styles automatically applied to elements with an `onclick`
+var touchActionAttributes = ['onclick'];
+// Remove whichever element types you do not want automatically getting styles applied to them
 var touchActionSelectors = ['button', 'input', 'a', 'textarea'];
+// The actual style string that is applied to the elements. You can tweak this if you want something different.
 var touchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
 
 function TouchActionSupport() {
@@ -43,20 +49,10 @@ TouchActionSupport.prototype.transform = function TouchActionSupport_transform(a
 };
 
 TouchActionSupport.prototype.validate = function TouchActionSupport_validate(node) {
-  var modifier;
-  var onValue;
-  var hasAction;
-  var hasClick;
   var isFocusable;
 
   if (node.type === 'ElementNode') {
-    modifier = elementModifierForPath(node, 'action');
-    onValue = modifier ? hashPairForKey(modifier.hash, 'on') : false;
-
-    hasAction = modifier && (!onValue || onValue === 'click');
     isFocusable = touchActionSelectors.indexOf(node.tag) !== -1;
-
-    hasClick = elementAttribute(node, 'onclick');
 
     if (isFocusable) {
       if (node.tag === 'input') {
@@ -65,12 +61,18 @@ TouchActionSupport.prototype.validate = function TouchActionSupport_validate(nod
       }
     }
 
-    return hasClick || hasAction || isFocusable;
+    return hasClick(node) || hasAction(node) || isFocusable;
   }
 
   return false;
 };
 
+/**
+ * Get the element at the given path from the element
+ * @param node The element
+ * @param path The attribute to look for i.e. 'onclick'
+ * @returns {*} The value of the attribute on the element
+ */
 function elementAttribute(node, path) {
   var attributes = node.attributes;
   for (var i = 0, l = attributes.length; i < l; i++) {
@@ -93,6 +95,31 @@ function elementModifierForPath(node, path) {
   }
 
   return false;
+}
+
+/**
+ * Checks if the element has an `action` and if we have touchActionOnAction enabled
+ * @param node The element to check
+ * @returns {*|boolean} Returns true if the element has an action
+ */
+function hasAction(node) {
+  if (!touchActionOnAction) {
+    return false;
+  }
+
+  var modifier = elementModifierForPath(node, 'action');
+  var onValue = modifier ? hashPairForKey(modifier.hash, 'on') : false;
+
+  return modifier && (!onValue || onValue === 'click');
+}
+
+/**
+ * Check if the element has an `onclick` attribute and that we have configured `onclick` in touchActionAttributes
+ * @param node The element to check for `onclick`
+ * @returns {boolean|*} Returns `true` is `onclick` is enabled in the config and exists on the element
+ */
+function hasClick(node) {
+  return touchActionAttributes.indexOf('onclick') !== -1 && elementAttribute(node, 'onclick');
 }
 
 function hashPairForKey(hash, key) {
@@ -118,6 +145,8 @@ function sexpr(node) {
 function setConfigValues(config) {
   config = config || {};
 
+  touchActionOnAction = config.touchActionOnAction || touchActionOnAction;
+  touchActionAttributes = config.touchActionAttributes || touchActionAttributes;
   touchActionSelectors = config.touchActionSelectors || touchActionSelectors;
   touchActionProperties = config.touchActionProperties || touchActionProperties;
 }
