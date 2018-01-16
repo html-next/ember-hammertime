@@ -81,6 +81,8 @@ The AST Walker can be configured via config/environment.js:
 var ENV = {
   // ...
   EmberHammertime: {
+    touchActionOnAction: true,
+    touchActionAttributes: ['onclick'],
     touchActionSelectors: ['button', 'input', 'a', 'textarea'],
     touchActionProperties: 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;'
   }
@@ -88,6 +90,16 @@ var ENV = {
 ```
 
 The same properties can be overridden on the touchAction Mixin or on your components directly.
+
+##### `touchActionOnAction`
+
+Defines whether or not to automatically apply the touch-action styles to elements that have an `action`.
+Defaults to `true`
+
+##### `touchActionAttributes`
+
+Defines the attributes to look for on elements to automatically apply the touch-action styles to.
+Defaults to `['onclick']`
 
 ##### `touchActionSelectors`
 
