@@ -1,6 +1,17 @@
 Changelog
 =========
 
+## v1.3.0
+
+### Pull Requests
+
+- [#43](https://github.com/html-next/ember-hammertime/pull/43) **docs**: document disabling hammertime  *by [Matt McManus](https://github.com/mattmcmanus)*
+- [#44](https://github.com/html-next/ember-hammertime/pull/44)  First attempt at making more configurable  *by [html-next](https://github.com/html-next)*
+
+#### Commits
+
+- [62022682](https://github.com/html-next/ember-hammertime/commit/62022682ef6c1530b7fd142ea385ccf3cfee493c) **docs(compnent)**: document disabling hammertime *by [Matt McManus](https://github.com/mattmcmanus)*
+
 ## v1.2.4
 
 ### Pull Requests
