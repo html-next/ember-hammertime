@@ -1,12 +1,6 @@
-import Ember from "ember";
-
-const {
-  computed,
-  defineProperty,
-  get,
-  Mixin,
-  String: {htmlSafe, isHTMLSafe}
-} = Ember;
+import { get, defineProperty, computed } from '@ember/object';
+import Mixin from '@ember/object/mixin';
+import { isHTMLSafe, htmlSafe } from '@ember/string';
 
 const FocusableInputTypes = ['button', 'submit', 'text', 'file'];
 // Set this to `false` to not apply the styles automatically to elements with an `action`
@@ -54,7 +48,9 @@ export default Mixin.create({
 
     const hasClick = click && click.apply;
     const hasTag = tagName !== '' || (tagName === null && hasClick);
-    if (!hasTag) { return; }
+    if (!hasTag) {
+      return;
+    }
 
     let maybeApplyStyle = ignoreTouchAction === false;
     let hasClickHandler = ignoreTouchAction === false && hasClick;
@@ -96,5 +92,5 @@ export default Mixin.create({
       let desc = this.otherStyleKey ? computed(this.otherStyleKey, touchActionStyle) : computed(touchActionStyle);
       defineProperty(this, 'touchActionStyle', desc);
     }
-  },
+  }
 });

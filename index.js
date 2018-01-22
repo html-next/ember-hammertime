@@ -1,4 +1,4 @@
-/* eslint-env node */
+/* eslint-disable ember-suave/prefer-destructuring */
 'use strict';
 
 const path = require('path');
@@ -18,8 +18,8 @@ module.exports = {
     }
 
     if (typeof app.import !== 'function') {
-      throw new Error('Ember-Hammertime is being used within another addon or engine ' +
-        'and is having trouble registering itself to the parent application.');
+      throw new Error('ember-hammertime is being used within another addon or engine '
+       + 'and is having trouble registering itself to the parent application.');
     }
 
     app.import('vendor/hammer-time.js');
@@ -51,7 +51,7 @@ module.exports = {
 
   setupPreprocessorRegistry(type, registry) {
     let touchAction = require('./htmlbars-plugins/touch-action');
-    let config = this.projectConfig()['EmberHammertime'];
+    let config = this.projectConfig().EmberHammertime;
     touchAction.setConfigValues(config);
 
     registry.add('htmlbars-ast-plugin', {

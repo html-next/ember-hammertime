@@ -1,6 +1,4 @@
-import Ember from 'ember';
+import LinkComponent from '@ember/routing/link-component';
 import TouchActionMixin from '../mixins/touch-action';
-
-let LinkComponent = Ember.LinkComponent;
 
 export default LinkComponent.reopen(TouchActionMixin);

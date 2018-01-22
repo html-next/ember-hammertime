@@ -1,8 +1,4 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import TouchActionMixin from '../mixins/touch-action';
-
-const {
-  Component
-} = Ember;
 
 export default Component.reopen(TouchActionMixin);
