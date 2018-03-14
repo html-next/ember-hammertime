@@ -1,16 +1,19 @@
 import { get, defineProperty, computed } from '@ember/object';
 import Mixin from '@ember/object/mixin';
 import { isHTMLSafe, htmlSafe } from '@ember/string';
+import config from 'ember-get-config';
+
+const defaults = config.EmberHammertime || {};
 
 const FocusableInputTypes = ['button', 'submit', 'text', 'file'];
 // Set this to `false` to not apply the styles automatically to elements with an `action`
-const TouchActionOnAction = true;
+const TouchActionOnAction = (typeof defaults.touchActionOnAction == 'undefined') ? true : defaults.touchActionOnAction;
 // Remove 'onclick' if you do not want the styles automatically applied to elements with an `onclick`
-const TouchActionAttributes = ['onclick'];
+const TouchActionAttributes = defaults.touchActionAttributes || ['onclick'];
 // Remove whichever element types you do not want automatically getting styles applied to them
-const TouchActionSelectors = ['button', 'input', 'a', 'textarea'];
+const TouchActionSelectors = defaults.touchActionSelectors || ['button', 'input', 'a', 'textarea'];
 // The actual style string that is applied to the elements. You can tweak this if you want something different.
-const TouchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
+const TouchActionProperties = defaults.touchActionProperties || 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
 
 function touchActionStyle() {
   let style = get(this, 'touchActionProperties');
@@ -38,7 +41,7 @@ export default Mixin.create({
   ignoreTouchAction: false,
 
   init() {
-    this._super();
+    this._super(...arguments);
 
     const {
       tagName,
