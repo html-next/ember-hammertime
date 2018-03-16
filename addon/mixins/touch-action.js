@@ -7,7 +7,7 @@ const defaults = config.EmberHammertime || {};
 
 const FocusableInputTypes = ['button', 'submit', 'text', 'file'];
 // Set this to `false` to not apply the styles automatically to elements with an `action`
-const TouchActionOnAction = (typeof defaults.touchActionOnAction == 'undefined') ? true : defaults.touchActionOnAction;
+const TouchActionOnAction = defaults.touchActionOnAction === undefined ? true : defaults.touchActionOnAction;
 // Remove 'onclick' if you do not want the styles automatically applied to elements with an `onclick`
 const TouchActionAttributes = defaults.touchActionAttributes || ['onclick'];
 // Remove whichever element types you do not want automatically getting styles applied to them
