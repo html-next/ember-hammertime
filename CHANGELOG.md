@@ -1,6 +1,20 @@
 Changelog
 =========
 
+## v1.4.0
+
+### Pull Requests
+
+- [#47](https://github.com/html-next/ember-hammertime/pull/47)  Update dependencies to enable Greenkeeper 🌴  *by [html-next/greenkeeper](https://github.com/html-next/greenkeeper)*
+- [#48](https://github.com/html-next/ember-hammertime/pull/48)  Update eslint-plugin-node to the latest version 🚀  *by [html-next/greenkeeper](https://github.com/html-next/greenkeeper)*
+- [#49](https://github.com/html-next/ember-hammertime/pull/49)  Update ember-try to the latest version 🚀  *by [html-next/greenkeeper](https://github.com/html-next/greenkeeper)*
+- [#51](https://github.com/html-next/ember-hammertime/pull/51)  Update ember-native-dom-helpers to the latest version 🚀  *by [html-next/greenkeeper](https://github.com/html-next/greenkeeper)*
+- [#52](https://github.com/html-next/ember-hammertime/pull/52)  check config for defaults  *by [Scott Batson](https://github.com/sbatson5)*
+
+#### Commits
+
+- [c4b47d48](https://github.com/html-next/ember-hammertime/commit/c4b47d4836335a00aed3c70188143685300715f1) **docs(readme)**: add Greenkeeper badge *by [greenkeeper[bot]](https://github.com/greenkeeper[bot])*
+
 ## v1.3.0
 
 ### Pull Requests
