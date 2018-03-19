@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.4.1
+
+### Pull Requests
+
+- [#53](https://github.com/html-next/ember-hammertime/pull/53)  typecheck - remove spread args  *by [Scott Batson](https://github.com/sbatson5)*
+
 ## v1.4.0
 
 ### Pull Requests
