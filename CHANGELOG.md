@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.5.0
+
+### Pull Requests
+
+- [#56](https://github.com/html-next/ember-hammertime/pull/56)  Ember 3.1  *by [html-next](https://github.com/html-next)*
+
 ## v1.4.1
 
 ### Pull Requests
