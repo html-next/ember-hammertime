@@ -24,11 +24,7 @@ Ember-hammertime uses an AST Walker to add [touch-action](https://developer.mozi
 
 ## Support, Questions, Collaboration
 
-`ember-hammertime` is the little brother of [ember-gestures](https://github.com/html-next/ember-gestures).  For support, questions,
-collaboration or discussion you should join the [e-gestures](https://embercommunity.slack.com/messages/e-gestures/) channel on Slack.
-
-[![Slack Status](https://ember-community-slackin.herokuapp.com/badge.svg)](https://ember-community-slackin.herokuapp.com/)
-
+Join the [Ember community on Discord](https://discord.gg/zT3asNS)
 
 ### Status
 
