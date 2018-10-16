@@ -7,7 +7,7 @@ const MergeTrees = require('broccoli-merge-trees');
 const map = require('broccoli-stew').map;
 
 module.exports = {
-  name: 'ember-hammertime',
+  name: require('./package').name,
 
   included(app) {
     this._super.included.apply(this, arguments);
